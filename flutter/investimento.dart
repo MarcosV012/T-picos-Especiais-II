@@ -22,6 +22,16 @@ class _SimularInvestimentoState extends State<SimularInvestimento> {
 
   String _resultado = '';
 
+  _limpar() {
+    _valorController.clear(); 
+    _aporteController.clear(); 
+    _taxaController.clear();
+    _periodoController.clear();
+    setState(() {
+      _resultado = '';
+    });  
+  }
+
   _calcular() {
     setState(() {
       double valor = double.parse(_valorController.text);
@@ -47,15 +57,19 @@ class _SimularInvestimentoState extends State<SimularInvestimento> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F4F0),
       appBar: AppBar(
-        title: const Text(
-          "Simulador de Investimentos",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
+        title: const Text('Simulador de Investimentos', 
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
         centerTitle: true,
         backgroundColor: Colors.green[700],
-        elevation: 4,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh, color: Colors.white),
+            onPressed: () {
+              _limpar();
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
